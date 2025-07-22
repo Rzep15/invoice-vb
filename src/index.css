@@ -10,6 +10,7 @@
   body {
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
+    font-size: 12px;
   }
   
   .bg-gradient-to-r {
@@ -19,6 +20,21 @@
   .bg-gradient-to-br {
     background: #fbbf24 !important;
   }
+}
+
+/* PDF Generation styles */
+body.generating-pdf {
+  -webkit-print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  font-size: 12px !important;
+}
+
+body.generating-pdf .bg-gradient-to-r {
+  background: #fbbf24 !important;
+}
+
+body.generating-pdf .bg-gradient-to-br {
+  background: #fbbf24 !important;
 }
 
 /* Custom scrollbar */

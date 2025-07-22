@@ -59,13 +59,30 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     if (!element) return;
 
     try {
+      // Apply print styles temporarily for PDF generation
+      document.body.classList.add('generating-pdf');
+      
       const canvas = await html2canvas(element, {
-        scale: 1.5,
+        scale: 2,
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
         width: element.scrollWidth,
-        height: element.scrollHeight
+        height: element.scrollHeight,
+        onclone: (clonedDoc) => {
+          // Apply print styles to cloned document
+          const style = clonedDoc.createElement('style');
+          style.textContent = `
+            body { 
+              -webkit-print-color-adjust: exact !important;
+              color-adjust: exact !important;
+              font-size: 12px !important;
+            }
+            .bg-gradient-to-r { background: #fbbf24 !important; }
+            .bg-gradient-to-br { background: #fbbf24 !important; }
+          `;
+          clonedDoc.head.appendChild(style);
+        }
       });
       
       const imgData = canvas.toDataURL('image/png');
@@ -74,23 +91,29 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       const imgWidth = 210;
       const pageHeight = 297;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
       
-      // Scale down if content is too tall for one page
-      if (imgHeight > pageHeight) {
-        const scale = pageHeight / imgHeight;
-        const scaledWidth = imgWidth * scale;
-        const scaledHeight = pageHeight;
-        const xOffset = (imgWidth - scaledWidth) / 2;
-        
-        pdf.addImage(imgData, 'PNG', xOffset, 0, scaledWidth, scaledHeight);
-      } else {
+      // Add first page
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      
+      // Add additional pages if needed
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
         pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
       }
       
       pdf.save(`Invoice-${invoiceData.invoiceNumber}.pdf`);
+      
+      // Remove temporary class
+      document.body.classList.remove('generating-pdf');
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Terjadi kesalahan saat membuat PDF');
+      document.body.classList.remove('generating-pdf');
     }
   };
 
