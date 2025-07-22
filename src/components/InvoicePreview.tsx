@@ -1,5 +1,5 @@
 import React from 'react';
-import { Printer, Download, ArrowLeft, Phone, Mail, Instagram } from 'lucide-react';
+import { Printer, Download, ArrowLeft, Phone, Mail, Instagram, MessageCircle } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import type { InvoiceData } from '../App';
@@ -95,6 +95,62 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     }
   };
 
+  const handleSendWhatsApp = () => {
+    const packageName = invoiceData.selectedPackage?.name || '';
+    const total = formatCurrency(calculateTotal());
+    const grandTotal = formatCurrency(calculateGrandTotal());
+    const eventDate = formatDate(invoiceData.eventDate);
+    
+    let message = `*INVOICE S2M VIDEOBOOTH 360*\n\n`;
+    message += `📋 *Invoice:* ${invoiceData.invoiceNumber}\n`;
+    message += `👤 *Customer:* ${invoiceData.customerName}\n`;
+    message += `📅 *Tanggal Event:* ${eventDate}\n`;
+    message += `🎯 *Jenis Event:* ${invoiceData.eventLocation}\n\n`;
+    
+    message += `*DETAIL LAYANAN:*\n`;
+    message += `🌟 Paket ${packageName} - ${formatCurrency(invoiceData.selectedPackage?.price || 0)}\n`;
+    
+    if (invoiceData.additionalServices.length > 0) {
+      invoiceData.additionalServices.forEach(service => {
+        message += `• ${service.name} - ${formatCurrency(service.price)}\n`;
+      });
+    }
+    
+    message += `\n*RINGKASAN PEMBAYARAN:*\n`;
+    message += `💰 Subtotal: ${formatCurrency(calculateSubtotal())}\n`;
+    
+    if (invoiceData.discountPercent > 0) {
+      message += `🎁 Diskon (${invoiceData.discountPercent}%): -${formatCurrency(calculateDiscount())}\n`;
+    }
+    
+    if (invoiceData.shippingCost > 0) {
+      message += `🚚 Ongkos Kirim: ${formatCurrency(invoiceData.shippingCost)}\n`;
+    }
+    
+    message += `💳 *Total Keseluruhan: ${grandTotal}*\n`;
+    
+    if (invoiceData.dpAmount > 0) {
+      message += `💵 DP: -${formatCurrency(invoiceData.dpAmount)}\n`;
+      message += `💰 *Sisa Pembayaran: ${total}*\n`;
+    }
+    
+    message += `\n📊 *Status:* ${invoiceData.paymentStatus === 'lunas' ? '✅ LUNAS' : '⏳ BELUM LUNAS'}\n\n`;
+    
+    if (invoiceData.notes) {
+      message += `📝 *Catatan:*\n${invoiceData.notes}\n\n`;
+    }
+    
+    message += `📞 *Kontak:*\n`;
+    message += `• WhatsApp: 0812-1111-4522\n`;
+    message += `• Instagram: @s2m_videobooth360\n`;
+    message += `• Email: official.s2mproduction@gmail.com\n\n`;
+    message += `Terima kasih telah mempercayakan acara Anda kepada S2M Videobooth 360! 🎉`;
+    
+    const phoneNumber = invoiceData.customerPhone?.replace(/\D/g, '') || '';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
   return (
     <div className="space-y-6">
       {/* Action Buttons */}
@@ -121,6 +177,13 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           >
             <Download className="h-4 w-4" />
             <span>Download</span>
+          </button>
+          <button
+            onClick={handleSendWhatsApp}
+            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          >
+            <MessageCircle className="h-4 w-4" />
+            <span>Kirim ke WhatsApp</span>
           </button>
         </div>
       </div>
