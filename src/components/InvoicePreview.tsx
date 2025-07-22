@@ -101,22 +101,25 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     const grandTotal = formatCurrency(calculateGrandTotal());
     const eventDate = formatDate(invoiceData.eventDate);
     
-    let message = `*INVOICE S2M VIDEOBOOTH 360*\n\n`;
-    message += `📋 *Invoice:* ${invoiceData.invoiceNumber}\n`;
+    let message = `🎬 *INVOICE S2M VIDEOBOOTH 360* 🎬\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `📋 *No. Invoice:* ${invoiceData.invoiceNumber}\n`;
     message += `👤 *Customer:* ${invoiceData.customerName}\n`;
     message += `📅 *Tanggal Event:* ${eventDate}\n`;
     message += `🎯 *Jenis Event:* ${invoiceData.eventLocation}\n\n`;
     
-    message += `*DETAIL LAYANAN:*\n`;
-    message += `🌟 Paket ${packageName} - ${formatCurrency(invoiceData.selectedPackage?.price || 0)}\n`;
+    message += `📦 *DETAIL LAYANAN:*\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `🌟 Paket ${packageName} (${invoiceData.selectedPackage?.duration}) - ${formatCurrency(invoiceData.selectedPackage?.price || 0)}\n`;
     
     if (invoiceData.additionalServices.length > 0) {
       invoiceData.additionalServices.forEach(service => {
-        message += `• ${service.name} - ${formatCurrency(service.price)}\n`;
+        message += `➕ ${service.name} - ${formatCurrency(service.price)}\n`;
       });
     }
     
-    message += `\n*RINGKASAN PEMBAYARAN:*\n`;
+    message += `\n💰 *RINGKASAN PEMBAYARAN:*\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `💰 Subtotal: ${formatCurrency(calculateSubtotal())}\n`;
     
     if (invoiceData.discountPercent > 0) {
@@ -127,24 +130,29 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       message += `🚚 Ongkos Kirim: ${formatCurrency(invoiceData.shippingCost)}\n`;
     }
     
-    message += `💳 *Total Keseluruhan: ${grandTotal}*\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `💳 *TOTAL KESELURUHAN: ${grandTotal}*\n`;
     
     if (invoiceData.dpAmount > 0) {
-      message += `💵 DP: -${formatCurrency(invoiceData.dpAmount)}\n`;
-      message += `💰 *Sisa Pembayaran: ${total}*\n`;
+      message += `💵 DP (Down Payment): -${formatCurrency(invoiceData.dpAmount)}\n`;
+      message += `💰 *SISA PEMBAYARAN: ${total}*\n`;
     }
     
-    message += `\n📊 *Status:* ${invoiceData.paymentStatus === 'lunas' ? '✅ LUNAS' : '⏳ BELUM LUNAS'}\n\n`;
+    message += `\n📊 *STATUS PEMBAYARAN:* ${invoiceData.paymentStatus === 'lunas' ? '✅ LUNAS' : '⏳ BELUM LUNAS'}\n\n`;
     
     if (invoiceData.notes) {
-      message += `📝 *Catatan:*\n${invoiceData.notes}\n\n`;
+      message += `📝 *CATATAN PENTING:*\n`;
+      message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+      message += `${invoiceData.notes}\n\n`;
     }
     
-    message += `📞 *Kontak:*\n`;
-    message += `• WhatsApp: 0812-1111-4522\n`;
-    message += `• Instagram: @s2m_videobooth360\n`;
-    message += `• Email: official.s2mproduction@gmail.com\n\n`;
-    message += `Terima kasih telah mempercayakan acara Anda kepada S2M Videobooth 360! 🎉`;
+    message += `📞 *HUBUNGI KAMI:*\n`;
+    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `📱 WhatsApp: 0812-1111-4522\n`;
+    message += `📸 Instagram: @s2m_videobooth360\n`;
+    message += `📧 Email: official.s2mproduction@gmail.com\n\n`;
+    message += `🙏 *Terima kasih telah mempercayakan acara Anda kepada S2M Videobooth 360!* 🎉\n`;
+    message += `🎬 *Siap membuat momen berharga Anda menjadi tak terlupakan!* ✨`;
     
     const phoneNumber = invoiceData.customerPhone?.replace(/\D/g, '') || '';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
