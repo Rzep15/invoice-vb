@@ -214,10 +214,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
             </div>
             <div className="text-right flex flex-col items-end">
               <h2 className="text-2xl font-bold text-gray-900 print:text-xl">INVOICE</h2>
-              <p className="text-gray-600 text-sm print:text-xs">INV-{invoiceData.invoiceNumber}</p>
-              <p className="text-gray-500 text-xs print:text-xs mt-1">
-                INV-(tahun)-(bulan)-(produk)-(nomor urut)
-              </p>
+              <p className="text-gray-600 text-sm print:text-xs">{invoiceData.invoiceNumber}</p>
               <div className={`mt-1 px-2 py-1 rounded-full text-xs font-semibold print:mt-1 ${
                 invoiceData.paymentStatus === 'lunas' 
                   ? 'bg-green-100 text-green-800' 
