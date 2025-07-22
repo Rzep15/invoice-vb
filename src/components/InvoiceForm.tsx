@@ -266,8 +266,8 @@ export default function InvoiceForm({ invoiceData, setInvoiceData, packages, onG
             type="number"
             min="0"
             max="100"
-            value={invoiceData.discountPercent}
-            onChange={(e) => setInvoiceData(prev => ({ ...prev, discountPercent: parseInt(e.target.value) || 0 }))}
+            value={invoiceData.discountPercent === 0 ? '' : invoiceData.discountPercent}
+            onChange={(e) => setInvoiceData(prev => ({ ...prev, discountPercent: e.target.value === '' ? 0 : parseInt(e.target.value) || 0 }))}
             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
             placeholder="0"
           />
@@ -280,8 +280,8 @@ export default function InvoiceForm({ invoiceData, setInvoiceData, packages, onG
           <input
             type="number"
             min="0"
-            value={invoiceData.shippingCost}
-            onChange={(e) => setInvoiceData(prev => ({ ...prev, shippingCost: parseInt(e.target.value) || 0 }))}
+            value={invoiceData.shippingCost === 0 ? '' : invoiceData.shippingCost}
+            onChange={(e) => setInvoiceData(prev => ({ ...prev, shippingCost: e.target.value === '' ? 0 : parseInt(e.target.value) || 0 }))}
             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
             placeholder="0"
           />
@@ -294,8 +294,8 @@ export default function InvoiceForm({ invoiceData, setInvoiceData, packages, onG
           <input
             type="number"
             min="0"
-            value={invoiceData.dpAmount}
-            onChange={(e) => setInvoiceData(prev => ({ ...prev, dpAmount: parseInt(e.target.value) || 0 }))}
+            value={invoiceData.dpAmount === 0 ? '' : invoiceData.dpAmount}
+            onChange={(e) => setInvoiceData(prev => ({ ...prev, dpAmount: e.target.value === '' ? 0 : parseInt(e.target.value) || 0 }))}
             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
             placeholder="0"
           />
