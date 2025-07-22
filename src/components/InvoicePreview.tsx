@@ -131,7 +131,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img 
-                src="/public/S2M.png" 
+                src="https://i.imgur.com/IJxCjEL.png" 
                 alt="S2M Videobooth 360" 
                 className="h-12 w-12 object-contain"
               />
