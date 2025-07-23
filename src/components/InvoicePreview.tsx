@@ -101,9 +101,9 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     const grandTotal = formatCurrency(calculateGrandTotal());
     const eventDate = formatDate(invoiceData.eventDate);
     
-    let message = `🎬 *INVOICE - S2M VIDEOBOOTH 360*\n`;
+    let message = `📄 *INVOICE - S2M VIDEOBOOTH 360*\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    message += `📄 *No. Invoice:* ${invoiceData.invoiceNumber}\n`;
+    message += `🔢 *No. Invoice:* ${invoiceData.invoiceNumber}\n`;
     message += `📅 *Tanggal Invoice:* ${formatDate(invoiceData.date)}\n`;
     message += `👤 *Nama Customer:* ${invoiceData.customerName}\n`;
     if (eventDate !== '-') {
@@ -114,40 +114,40 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     }
     message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
     
-    message += `📦 *DETAIL LAYANAN & PAKET*\n\n`;
+    message += `📋 *DETAIL LAYANAN & PAKET*\n\n`;
     message += `🌟 *Paket ${packageName}*\n`;
     message += `⏰ Durasi: ${invoiceData.selectedPackage?.duration}\n`;
     message += `💰 Harga: ${formatCurrency(invoiceData.selectedPackage?.price || 0)}\n`;
     
     if (invoiceData.additionalServices.length > 0) {
-      message += `\n🔧 *Layanan Tambahan:*\n`;
+      message += `\n➕ *Layanan Tambahan:*\n`;
       invoiceData.additionalServices.forEach(service => {
-        message += `• ${service.name}\n`;
+        message += `  • ${service.name}\n`;
         message += `  💰 ${formatCurrency(service.price)}\n`;
       });
     }
     
     message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `💳 *RINCIAN PEMBAYARAN*\n\n`;
-    message += `📊 Subtotal: *${formatCurrency(calculateSubtotal())}*\n`;
+    message += `💰 *RINCIAN PEMBAYARAN*\n\n`;
+    message += `📈 Subtotal: *${formatCurrency(calculateSubtotal())}*\n`;
     
     if (invoiceData.discountPercent > 0) {
-      message += `🎁 Diskon (${invoiceData.discountPercent}%): *-${formatCurrency(calculateDiscount())}*\n`;
+      message += `🏷️ Diskon (${invoiceData.discountPercent}%): *-${formatCurrency(calculateDiscount())}*\n`;
     }
     
     if (invoiceData.shippingCost > 0) {
       message += `🚚 Ongkos Kirim: *${formatCurrency(invoiceData.shippingCost)}*\n`;
     }
     
-    message += `\n💎 *TOTAL KESELURUHAN: ${grandTotal}*\n`;
+    message += `\n🏆 *TOTAL KESELURUHAN: ${grandTotal}*\n`;
     
     if (invoiceData.dpAmount > 0) {
-      message += `💵 DP Terbayar: *-${formatCurrency(invoiceData.dpAmount)}*\n`;
-      message += `\n🔥 *SISA PEMBAYARAN: ${total}*\n`;
+      message += `💳 DP Terbayar: *-${formatCurrency(invoiceData.dpAmount)}*\n`;
+      message += `\n💸 *SISA PEMBAYARAN: ${total}*\n`;
     }
     
     message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `📊 *Status Pembayaran:* ${invoiceData.paymentStatus === 'lunas' ? '✅ *LUNAS*' : '⏳ *BELUM LUNAS*'}\n`;
+    message += `💼 *Status Pembayaran:* ${invoiceData.paymentStatus === 'lunas' ? '✅ *LUNAS*' : '⏳ *BELUM LUNAS*'}\n`;
     
     if (invoiceData.notes) {
       message += `\n📝 *CATATAN KHUSUS:*\n`;
@@ -155,14 +155,14 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     }
     
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `📞 *HUBUNGI KAMI:*\n\n`;
+    message += `📞 *KONTAK KAMI:*\n\n`;
     message += `📱 WhatsApp: *0812-1111-4522*\n`;
-    message += `📸 Instagram: *@s2m_videobooth360*\n`;
+    message += `📷 Instagram: *@s2m_videobooth360*\n`;
     message += `📧 Email: *official.s2mproduction@gmail.com*\n\n`;
     message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
     message += `🙏 Terima kasih telah mempercayakan momen spesial Anda kepada *S2M Videobooth 360*!\n\n`;
-    message += `✨ *Kami siap membuat acara Anda tak terlupakan!* ✨\n`;
-    message += `🎊 *Videobooth 360° Terbaik untuk Momen Terbaik* 🎊`;
+    message += `🎯 *Kami siap membuat acara Anda tak terlupakan!*\n`;
+    message += `🎪 *Videobooth 360° Terbaik untuk Momen Terbaik*`;
     
     const phoneNumber = invoiceData.customerPhone?.replace(/\D/g, '') || '';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
