@@ -102,7 +102,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     const eventDate = formatDate(invoiceData.eventDate);
     
     let message = `📄 *INVOICE - S2M VIDEOBOOTH 360*\n`;
-    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    message += `\n`;
     message += `🔢 *No. Invoice:* ${invoiceData.invoiceNumber}\n`;
     message += `📅 *Tanggal Invoice:* ${formatDate(invoiceData.date)}\n`;
     message += `👤 *Nama Customer:* ${invoiceData.customerName}\n`;
@@ -112,7 +112,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
     if (invoiceData.eventLocation) {
       message += `🎉 *Jenis Event:* ${invoiceData.eventLocation}\n`;
     }
-    message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `\n`;
     
     message += `📋 *DETAIL LAYANAN & PAKET*\n\n`;
     message += `🌟 *Paket ${packageName}*\n`;
@@ -127,7 +127,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       });
     }
     
-    message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `\n`;
     message += `💰 *RINCIAN PEMBAYARAN*\n\n`;
     message += `📈 Subtotal: *${formatCurrency(calculateSubtotal())}*\n`;
     
@@ -146,7 +146,7 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       message += `\n💸 *SISA PEMBAYARAN: ${total}*\n`;
     }
     
-    message += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `\n`;
     message += `💼 *Status Pembayaran:* ${invoiceData.paymentStatus === 'lunas' ? '✅ *LUNAS*' : '⏳ *BELUM LUNAS*'}\n`;
     
     if (invoiceData.notes) {
@@ -154,12 +154,12 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       message += `${invoiceData.notes}\n\n`;
     }
     
-    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `\n`;
     message += `📞 *KONTAK KAMI:*\n\n`;
     message += `📱 WhatsApp: *0812-1111-4522*\n`;
     message += `📷 Instagram: *@s2m_videobooth360*\n`;
     message += `📧 Email: *official.s2mproduction@gmail.com*\n\n`;
-    message += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+    message += `\n`;
     message += `🙏 Terima kasih telah mempercayakan momen spesial Anda kepada *S2M Videobooth 360*!\n\n`;
     message += `🎯 *Kami siap membuat acara Anda tak terlupakan!*\n`;
     message += `🎪 *Videobooth 360° Terbaik untuk Momen Terbaik*`;
