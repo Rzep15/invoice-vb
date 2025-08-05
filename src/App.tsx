@@ -57,7 +57,7 @@ const packages: Package[] = [
 function App() {
   const [showPreview, setShowPreview] = useState(false);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>({
-    invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+    invoiceNumber: '',
     date: new Date().toISOString().split('T')[0],
     customerName: '',
     customerPhone: '',
