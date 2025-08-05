@@ -65,14 +65,14 @@ export default function InvoiceForm({ invoiceData, setInvoiceData, packages, onG
 
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                No. Invoice (Manual)
+                No. Invoice *
               </label>
               <input
                 type="text"
                 value={invoiceData.invoiceNumber}
                 onChange={(e) => setInvoiceData(prev => ({ ...prev, invoiceNumber: e.target.value }))}
                 className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                placeholder="INV-001"
+                placeholder="Masukkan nomor invoice (contoh: INV-001)"
               />
             </div>
 
