@@ -207,24 +207,24 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
       </div>
 
       {/* Invoice */}
-      <div id="invoice-content" className="bg-white text-gray-900 rounded-lg shadow-2xl overflow-hidden max-w-4xl mx-auto print:shadow-none print:max-w-none">
+      <div id="invoice-content" className="bg-white text-gray-900 rounded-lg shadow-2xl overflow-hidden max-w-4xl mx-auto print:shadow-none print:max-w-none print:min-h-0 print:h-auto">
         {/* Header */}
-        <div className="bg-white border-b-2 border-gray-200 px-6 py-6 print:py-3 print:px-3">
+        <div className="bg-white border-b-2 border-gray-200 px-6 py-6 print:py-2 print:px-3 print:break-inside-avoid">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img 
                 src="https://i.imgur.com/IJxCjEL.png" 
                 alt="S2M Videobooth 360" 
-                className="h-16 w-16 object-contain print:h-10 print:w-10"
+                className="h-16 w-16 object-contain print:h-12 print:w-12"
               />
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 print:text-lg">S2M Videobooth 360</h1>
-                <p className="text-gray-600 text-sm print:text-sm">Sewa Videobooth 360</p>
+                <h1 className="text-2xl font-bold text-gray-900 print:text-xl">S2M Videobooth 360</h1>
+                <p className="text-gray-600 text-sm print:text-base">Sewa Videobooth 360</p>
               </div>
             </div>
             <div className="text-right flex flex-col items-end">
               <h2 className="text-3xl font-bold text-gray-900 print:text-xl">INVOICE</h2>
-              <p className="text-gray-600 text-sm print:text-sm">{invoiceData.invoiceNumber}</p>
+              <p className="text-gray-600 text-sm print:text-base">{invoiceData.invoiceNumber}</p>
               <div className={`mt-2 px-3 py-1 rounded-full text-xs font-semibold print:mt-1 ${
                 invoiceData.paymentStatus === 'lunas' 
                   ? 'bg-green-100 text-green-800' 
@@ -237,30 +237,30 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
         </div>
 
         {/* Content */}
-        <div className="px-6 py-6 print:py-3 print:px-3">
+        <div className="px-6 py-6 print:py-2 print:px-3">
           {/* Invoice Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 print:gap-3 print:mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 print:gap-4 print:mb-4 print:break-inside-avoid">
             <div>
-              <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-sm print:mb-2">Informasi Perusahaan</h3>
-              <div className="space-y-2 text-sm text-gray-600 print:text-xs print:space-y-1">
+              <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-base print:mb-2">Informasi Perusahaan</h3>
+              <div className="space-y-2 text-sm text-gray-600 print:text-sm print:space-y-1">
                 <div className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4 print:h-3 print:w-3" />
+                  <Phone className="h-4 w-4" />
                   <span>0812-1111-4522</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Instagram className="h-4 w-4 print:h-3 print:w-3" />
+                  <Instagram className="h-4 w-4" />
                   <span>@s2m_videobooth360</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Mail className="h-4 w-4 print:h-3 print:w-3" />
+                  <Mail className="h-4 w-4" />
                   <span>official.s2mproduction@gmail.com</span>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-sm print:mb-2">Detail Invoice</h3>
-              <div className="space-y-2 text-sm print:text-xs print:space-y-1">
+              <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-base print:mb-2">Detail Invoice</h3>
+              <div className="space-y-2 text-sm print:text-sm print:space-y-1">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Tanggal Invoice:</span>
                   <span className="font-medium">{formatDate(invoiceData.date)}</span>
@@ -276,14 +276,14 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           </div>
 
           {/* Customer Info */}
-          <div className="mb-6 print:mb-3">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-sm print:mb-2">Kepada</h3>
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 print:p-2">
+          <div className="mb-6 print:mb-4 print:break-inside-avoid">
+            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-base print:mb-2">Kepada</h3>
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 print:p-3">
               <h4 className="font-semibold text-gray-900">{invoiceData.customerName}</h4>
-              {invoiceData.customerPhone && <p className="text-sm text-gray-600 print:text-xs">{invoiceData.customerPhone}</p>}
-              {invoiceData.customerAddress && <p className="text-sm text-gray-600 print:text-xs">{invoiceData.customerAddress}</p>}
+              {invoiceData.customerPhone && <p className="text-sm text-gray-600 print:text-sm">{invoiceData.customerPhone}</p>}
+              {invoiceData.customerAddress && <p className="text-sm text-gray-600 print:text-sm">{invoiceData.customerAddress}</p>}
               {invoiceData.eventLocation && (
-                <p className="text-sm text-gray-600 mt-2 print:text-xs print:mt-1">
+                <p className="text-sm text-gray-600 mt-2 print:text-sm print:mt-1">
                   <span className="font-medium">Jenis Event:</span> {invoiceData.eventLocation}
                 </p>
               )}
@@ -291,30 +291,30 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           </div>
 
           {/* Services Table */}
-          <div className="mb-6 print:mb-3">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-sm print:mb-2">Detail Layanan</h3>
-            <div className="overflow-x-auto">
+          <div className="mb-6 print:mb-4 print:break-inside-avoid">
+            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-base print:mb-2">Detail Layanan</h3>
+            <div className="overflow-x-auto print:overflow-visible">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-100">
-                    <th className="text-left p-3 border-b font-semibold text-gray-800 print:text-xs">Deskripsi</th>
-                    <th className="text-center p-3 border-b font-semibold text-gray-800 print:text-xs">Durasi</th>
-                    <th className="text-right p-3 border-b font-semibold text-gray-800 print:text-xs">Harga</th>
+                    <th className="text-left p-3 border-b font-semibold text-gray-800 print:text-sm print:p-2">Deskripsi</th>
+                    <th className="text-center p-3 border-b font-semibold text-gray-800 print:text-sm print:p-2">Durasi</th>
+                    <th className="text-right p-3 border-b font-semibold text-gray-800 print:text-sm print:p-2">Harga</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoiceData.selectedPackage && (
                     <tr>
-                      <td className="p-3 border-b print:text-xs">
+                      <td className="p-3 border-b print:text-sm print:p-2">
                         <div>
                           <span className="font-medium">🌟 Paket {invoiceData.selectedPackage.name}</span>
-                          <div className="text-xs text-gray-600 mt-1">
+                          <div className="text-xs text-gray-600 mt-1 print:text-xs">
                             Sewa Videobooth 360 
                           </div>
                         </div>
                       </td>
-                      <td className="p-3 border-b text-center print:text-xs">{invoiceData.selectedPackage.duration}</td>
-                      <td className="p-3 border-b text-right font-medium print:text-xs">
+                      <td className="p-3 border-b text-center print:text-sm print:p-2">{invoiceData.selectedPackage.duration}</td>
+                      <td className="p-3 border-b text-right font-medium print:text-sm print:p-2">
                         {formatCurrency(invoiceData.selectedPackage.price)}
                       </td>
                     </tr>
@@ -322,11 +322,11 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
                   
                   {invoiceData.additionalServices.map((service, index) => (
                     <tr key={index}>
-                      <td className="p-3 border-b print:text-xs">
+                      <td className="p-3 border-b print:text-sm print:p-2">
                         <span className="font-medium">{service.name}</span>
                       </td>
-                      <td className="p-3 border-b text-center print:text-xs">-</td>
-                      <td className="p-3 border-b text-right font-medium print:text-xs">
+                      <td className="p-3 border-b text-center print:text-sm print:p-2">-</td>
+                      <td className="p-3 border-b text-right font-medium print:text-sm print:p-2">
                         {formatCurrency(service.price)}
                       </td>
                     </tr>
@@ -337,45 +337,45 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           </div>
 
           {/* Totals */}
-          <div className="flex justify-end mb-6 print:mb-3">
+          <div className="flex justify-end mb-6 print:mb-4 print:break-inside-avoid">
             <div className="w-full max-w-sm">
-              <div className="space-y-2 print:space-y-1 print:text-xs">
-                <div className="flex justify-between py-2 border-b print:py-1 print:text-xs">
+              <div className="space-y-2 print:space-y-1 print:text-sm">
+                <div className="flex justify-between py-2 border-b print:py-1 print:text-sm">
                   <span className="text-gray-600">Subtotal:</span>
                   <span className="font-medium">{formatCurrency(calculateSubtotal())}</span>
                 </div>
                 
                 {invoiceData.discountPercent > 0 && (
-                  <div className="flex justify-between py-2 border-b text-red-600 print:py-1 print:text-xs">
+                  <div className="flex justify-between py-2 border-b text-red-600 print:py-1 print:text-sm">
                     <span>Diskon ({invoiceData.discountPercent}%):</span>
                     <span className="font-medium">-{formatCurrency(calculateDiscount())}</span>
                   </div>
                 )}
                 
                 {invoiceData.shippingCost > 0 && (
-                  <div className="flex justify-between py-2 border-b print:py-1 print:text-xs">
+                  <div className="flex justify-between py-2 border-b print:py-1 print:text-sm">
                     <span className="text-gray-600">Ongkos Kirim:</span>
                     <span className="font-medium">{formatCurrency(invoiceData.shippingCost)}</span>
                   </div>
                 )}
                 
-                <div className="flex justify-between py-2 border-b print:py-1 print:text-xs">
+                <div className="flex justify-between py-2 border-b print:py-1 print:text-sm">
                   <span className="text-gray-600">Total Keseluruhan:</span>
                   <span className="font-medium">{formatCurrency(calculateGrandTotal())}</span>
                 </div>
                 
                 {invoiceData.dpAmount > 0 && (
-                  <div className="flex justify-between py-2 border-b text-blue-600 print:py-1 print:text-xs">
+                  <div className="flex justify-between py-2 border-b text-blue-600 print:py-1 print:text-sm">
                     <span>DP (Down Payment):</span>
                     <span className="font-medium">-{formatCurrency(invoiceData.dpAmount)}</span>
                   </div>
                 )}
                 
-                <div className="flex justify-between py-3 border-t-2 border-gray-300 print:py-2 print:text-sm">
-                  <span className="text-lg font-semibold print:text-sm">
+                <div className="flex justify-between py-3 border-t-2 border-gray-300 print:py-2 print:text-base">
+                  <span className="text-lg font-semibold print:text-base">
                     {invoiceData.dpAmount > 0 ? 'Sisa Pembayaran:' : 'Total:'}
                   </span>
-                  <span className="text-lg font-bold text-gray-900 print:text-sm">
+                  <span className="text-lg font-bold text-gray-900 print:text-base">
                     {formatCurrency(calculateTotal())}
                   </span>
                 </div>
@@ -384,14 +384,14 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           </div>
 
           {/* Notes */}
-          <div className="mb-6 print:mb-3">
-            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-sm print:mb-2">Catatan</h3>
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 print:p-2">
-              <p className="text-sm text-gray-700 mb-2 print:text-xs print:mb-1">
+          <div className="mb-6 print:mb-4 print:break-inside-avoid">
+            <h3 className="text-lg font-semibold mb-3 text-gray-900 print:text-base print:mb-2">Catatan</h3>
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 print:p-3">
+              <p className="text-sm text-gray-700 mb-2 print:text-sm print:mb-1">
                 Pelunasan dilakukan paling lambat H-1 sebelum acara
               </p>
               {invoiceData.notes && (
-                <p className="text-sm text-gray-700 whitespace-pre-wrap border-t pt-2 print:text-xs print:pt-1 print:mb-1">
+                <p className="text-sm text-gray-700 whitespace-pre-wrap border-t pt-2 print:text-sm print:pt-1 print:mb-1">
                   {invoiceData.notes}
                 </p>
               )}
@@ -399,12 +399,12 @@ export default function InvoicePreview({ invoiceData, onBackToForm }: InvoicePre
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-200 pt-4 mt-6 print:pt-2 print:mt-3">
+          <div className="border-t border-gray-200 pt-4 mt-6 print:pt-3 print:mt-4 print:break-inside-avoid">
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-2 print:text-xs print:mb-1">
+              <p className="text-sm text-gray-600 mb-2 print:text-sm print:mb-1">
                 Terima kasih telah mempercayakan acara Anda kepada S2M Videobooth 360
               </p>
-              <p className="text-xs text-gray-500 print:text-xs">
+              <p className="text-xs text-gray-500 print:text-sm">
                 Invoice ini dibuat secara otomatis dan sah tanpa tanda tangan
               </p>
             </div>
